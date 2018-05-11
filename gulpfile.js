@@ -3,7 +3,7 @@ var order = require('gulp-order');
 var coffee = require('gulp-coffee');
 var concat = require('gulp-concat');
 var gif = require('gulp-if');
-var print = require('gulp-print');
+var print = require('gulp-print').default;
 
 function stringEndsWith(str, suffix) {
   return str.indexOf(suffix, str.length - suffix.length) !== -1;
@@ -12,11 +12,11 @@ function stringEndsWith(str, suffix) {
 function isCoffeeFile(file) {
   return stringEndsWith(file.relative, 'coffee');
 }
-
+//各级目录是分开的，同级，不包含嵌套目录
 gulp.task('default', function () {
   gulp.src([
     './vendor/*.js',
-    './bower_components/jquery.js',
+    './bower_components/jquery.js',  //只加载未压缩版本
     './content/*.js',
     './content/*.coffee'
   ])
